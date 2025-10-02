@@ -2,15 +2,11 @@ function checkString(string, value) {
   if (string.length <= value) {
     return true;
   }
-  return false
+  return false;
 }
 
 
-
-
-
-
-console.log(checkString('проверяемая строка', 17));
+// console.log(checkString('проверяемая строка', 17));
 
 
 // // Строка короче 20 символов
@@ -29,7 +25,7 @@ function isPalindrom(string) {
   return emptyString === newString;
 }
 
-console.log(isPalindrom('кекс'))
+// console.log(isPalindrom('кекс'))
 // // Строка является палиндромом
 // имяФункции('топот'); // true
 // // Несмотря на разный регистр, тоже палиндром
@@ -37,18 +33,18 @@ console.log(isPalindrom('кекс'))
 // // Это не палиндром
 // имяФункции('Кекс');  // false
 
-function convertToString (string) {
+function convertToString(string) {
   const fixedString = string.toString();
   let stringToNumber = '';
   for (let i = 0; i <= fixedString.length; i++) {
-    if(!Number.isNaN(parseInt(fixedString[i], 10))) {
+    if (!Number.isNaN(parseInt(fixedString[i], 10))) {
       stringToNumber += fixedString[i];
     }
   }
   return parseInt(stringToNumber, 10);
 }
 
-console.log(convertToString(1.5));
+// console.log(convertToString(1.5));
 // имяФункции('2023 год');            // 2023
 // имяФункции('ECMAScript 2022');     // 2022
 // имяФункции('1 кефир, 0.5 батона'); // 105
