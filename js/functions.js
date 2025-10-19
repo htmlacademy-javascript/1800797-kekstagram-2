@@ -53,3 +53,34 @@ function convertToString(string) {
 // имяФункции(2023); // 2023
 // имяФункции(-1);   // 1
 // имяФункции(1.5);  // 15
+
+
+const getTimeInMinutes = (value) => {
+  const time = value.split(':');
+  return Number(time[0]) * 60 + Number(time[1]);
+};
+
+const getMeetingDuration = (start, duration) => start + duration;
+
+const checkTiming = (startJob, endJob, startMeeting, meetingDuration) =>
+  getTimeInMinutes(startJob) <= getTimeInMinutes(startMeeting) &&
+  getTimeInMinutes(endJob) > getTimeInMinutes(startMeeting) &&
+  getMeetingDuration(getTimeInMinutes(startMeeting), meetingDuration) <= getTimeInMinutes(endJob);
+
+console.log(checkTiming('08:00', '17:30', '14:00', 90));
+console.log(checkTiming('8:0', '10:0', '8:0', 120));
+console.log(checkTiming('08:00', '14:30', '14:00', 90));
+console.log(checkTiming('14:00', '17:30', '08:0', 90));
+console.log(checkTiming('8:00', '17:30', '08:00', 900));
+
+/*
+'8:00' - начало рабочего дня
+'17:30' - конец рабочего дня
+'14:00' - начало встречи
+90 - продолжительность встречи в минутах
+*/
+// имяФункции('08:00', '17:30', '14:00', 90); // true
+// имяФункции('8:0', '10:0', '8:0', 120);     // true
+// имяФункции('08:00', '14:30', '14:00', 90); // false
+// имяФункции('14:00', '17:30', '08:0', 90);  // false
+// имяФункции('8:00', '17:30', '08:00', 900); // false
