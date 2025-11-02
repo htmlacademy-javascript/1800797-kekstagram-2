@@ -47,7 +47,7 @@ const getPhoto = () => ({
   comments: getComments(getRandomInteger(MIN_COMMENTS, MAX_COMMENTS))
 });
 
-const getPhotos = Array.from({length: PHOTOS}, getPhoto);
+const getPhotos = () => Array.from({length: PHOTOS}, getPhoto);
 
 
 export {getPhotos};
