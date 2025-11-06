@@ -32,13 +32,6 @@ const isEnterKey = (evt) => evt.key === 'Enter';
 
 const checkComments = (comment) => comment <= MAX_SHOWN_COMMENTS ? comment : MAX_SHOWN_COMMENTS;
 
-//   if (comment <= MAX_SHOWN_COMMENTS) {
-//     return comment;
-//   } else {
-//     return MAX_SHOWN_COMMENTS;
-//   }
-// };
-
 export { getRandomArrayElement,
   getRandomInteger,
   createRandomIdFromRangeGenerator,

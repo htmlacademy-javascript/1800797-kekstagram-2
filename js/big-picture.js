@@ -8,14 +8,23 @@ const commentsTotalQuanity = bigPicture.querySelector('.social__comment-total-co
 const socialCaption = bigPicture.querySelector('.social__caption');
 const commentsShownQuanity = bigPicture.querySelector('.social__comment-shown-count');
 const bigPictureCommentsContainer = bigPicture.querySelector('.social__comments');
+const bigPictureCommentItem = bigPicture.querySelector('.social__comment');
 
+const renderComment = (comment) => {
+  const commentElement = bigPictureCommentItem.cloneNode(true);
+  commentElement.querySelector('.social__picture').src = comment.avatar;
+  commentElement.querySelector('.social__text').src = comment.message;
+  return commentElement;
+
+};
 
 const renderComments = (comments) => {
   const fragment = document.createDocumentFragment();
   comments.forEach((item) => {
-    fragment.push(renderComment(item));
-
+    fragment.append(renderComment(item));
   });
+  bigPictureCommentsContainer.innerHTML = '';
+  bigPictureCommentsContainer.append(fragment);
 };
 
 
@@ -26,9 +35,8 @@ const openBigPicture = (photo) => {
   likesCount.textContent = photo.likes;
   commentsTotalQuanity.textContent = photo.comments.length;
   socialCaption.textContent = photo.description;
-  commentsShownQuanity.textContent = checkComments(photo.comments.length)
-
-  console.log(photo);
+  commentsShownQuanity.textContent = checkComments(photo.comments.length);
+  renderComments(photo.comments);
 };
 
 const closeBigPicture = () => {
