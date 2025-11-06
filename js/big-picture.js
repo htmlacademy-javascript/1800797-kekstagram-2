@@ -41,6 +41,6 @@ document.addEventListener('keydown', (evt) => {
     closeBigPicture();
   }
 });
-
+console.log()
 
 export { openBigPicture };
