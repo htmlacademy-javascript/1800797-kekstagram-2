@@ -49,6 +49,8 @@ const MIN_COMMENTS = 1;
 
 const MAX_COMMENTS = 30;
 
+const MAX_SHOWN_COMMENTS = 5;
+
 export {
   PHOTOS,
   DESCRIPTION,
@@ -60,5 +62,6 @@ export {
   MAX_AVATAR,
   NAMES,
   MIN_COMMENTS,
-  MAX_COMMENTS
+  MAX_COMMENTS,
+  MAX_SHOWN_COMMENTS
 };
