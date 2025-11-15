@@ -47,7 +47,7 @@ const openBigPicture = (photo) => {
   commentsVolume = photo.comments.length;
   bigPictureCommentsContainer.innerHTML = '';
   bigPicture.classList.remove('hidden');
-  document.body.classList.add('modal-open');;
+  document.body.classList.add('modal-open');
   bigPictureImage.src = photo.url;
   likesCount.textContent = photo.likes;
   socialCaption.textContent = photo.description;
@@ -64,7 +64,7 @@ bigPictureCommentsLoader.addEventListener('click', (evt) => {
 
 const closeBigPicture = () => {
   bigPicture.classList.add('hidden');
-  document.body.classList.remove('modal-open');;
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onClickEsc);
 };
 

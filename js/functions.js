@@ -1,11 +1,3 @@
-function checkString(string, value) {
-  if (string.length <= value) {
-    return true;
-  }
-  return false;
-}
-
-
 // console.log(checkString('проверяемая строка', 17));
 
 
