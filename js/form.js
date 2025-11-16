@@ -1,3 +1,4 @@
+import { resetScale } from './scale.js';
 import { isEscKey } from './utlis.js';
 import { validateForm } from './validation.js';
 
@@ -22,6 +23,7 @@ const showModal = () => {
   document.body.classList.add('modal-open');
   renderPreviewImage();
   document.addEventListener('keydown', onClickEsc);
+  resetScale();
 };
 
 imageInput.addEventListener('change', (evt) => {

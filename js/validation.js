@@ -17,13 +17,15 @@ const pristine = new Pristine(imageUploadForm, {
 true
 );
 
+const getTagsArray = (value) => value.replace(/ +/g, ' ').trim().toLowerCase().split(' ');
+
 const validateDescription = (value) => checkString(value, DESCRIPTION_LENGTH);
 
-const validateHashtagVolume = (value) => value.replace(/ +/g, ' ').trim().split(' ').length <= HASHTAGS_VOLUME;
+const validateHashtagVolume = (value) => getTagsArray(value).length <= HASHTAGS_VOLUME;
 
 const validateHashtag = (value) => {
-  const tags = value.replace(/ +/g, ' ').trim().split(' ');
-  return !tags.some((tag) => !HASHTAG_SYMBOLS.test(tag));
+  const tags = getTagsArray(value);
+  return !value.length ? true : !tags.some((tag) => !HASHTAG_SYMBOLS.test(tag));
 };
 
 
@@ -53,7 +55,7 @@ pristine.addValidator(
 );
 
 const validateUniqueHashtag = (value) => {
-  const tags = value.replace(/ +/g, ' ').trim().toLowerCase().split(' ');
+  const tags = getTagsArray(value);
   const uniqueTags = [...new Set(tags)];
   return tags.length === uniqueTags.length;
 };
