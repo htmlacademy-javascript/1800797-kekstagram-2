@@ -2,7 +2,6 @@ import { MAX_SHOWN_COMMENTS } from './constants.js';
 import { isEscKey, isEnterKey } from './utlis.js';
 const bigPicture = document.querySelector('.big-picture');
 const buttonClose = document.querySelector('.big-picture__cancel');
-const bodyBigPicture = document.querySelector('body');
 const bigPictureImage = bigPicture.querySelector('.big-picture__img img');
 const likesCount = bigPicture.querySelector('.likes-count');
 const socialCaption = bigPicture.querySelector('.social__caption');
@@ -48,7 +47,7 @@ const openBigPicture = (photo) => {
   commentsVolume = photo.comments.length;
   bigPictureCommentsContainer.innerHTML = '';
   bigPicture.classList.remove('hidden');
-  bodyBigPicture.classList.add('modal-open');
+  document.body.classList.add('modal-open');
   bigPictureImage.src = photo.url;
   likesCount.textContent = photo.likes;
   socialCaption.textContent = photo.description;
@@ -65,7 +64,7 @@ bigPictureCommentsLoader.addEventListener('click', (evt) => {
 
 const closeBigPicture = () => {
   bigPicture.classList.add('hidden');
-  bodyBigPicture.classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onClickEsc);
 };
 
