@@ -50,6 +50,10 @@ imgUploadCancelButton.addEventListener('click', () => {
 });
 
 function onClickEsc(evt) {
+  const isFocusedInput = evt.target.classList.contains('text__hashtags') || evt.target.classList.contains('text__description');
+  if (isFocusedInput) {
+    return false;
+  }
   if(isEscKey(evt)) {
     evt.preventDefault();
     closeImageInput();
