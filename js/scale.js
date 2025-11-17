@@ -14,6 +14,16 @@ let scale;
 const renderScale = () => {
   scaleControl.value = scale;
   imagePreview.style = `transform: scale(${scale / 100})`;
+  if (scale === MIN_SCALE) {
+    minus.disabled = true;
+  } else {
+    minus.disabled = false;
+  }
+  if (scale === MAX_SCALE) {
+    plus.disabled = true;
+  } else {
+    plus.disabled = false;
+  }
 };
 
 const onMinusClick = () => {
@@ -25,15 +35,7 @@ const onMinusClick = () => {
 const onPlusClick = () => {
   scale = scale + SCALE_STEP <= MAX_SCALE ? scale + SCALE_STEP : MAX_SCALE;
   renderScale();
-  // disableMaxScale();
 };
-
-// function disableMaxScale () {
-//   if (scale === MAX_SCALE) {
-//     onPlusClick.setAttribute('disabled', true);
-//   }
-// }
-
 
 minus.addEventListener('click', onMinusClick);
 plus.addEventListener('click', onPlusClick);
