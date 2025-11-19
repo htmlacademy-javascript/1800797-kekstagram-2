@@ -57,6 +57,11 @@ const HASHTAGS_VOLUME = 5;
 
 const HASHTAG_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 
+const SCALE_STEP = 25;
+
+const MIN_SCALE = 25;
+const MAX_SCALE = 100;
+
 export {
   PHOTOS,
   DESCRIPTION,
@@ -72,6 +77,9 @@ export {
   MAX_SHOWN_COMMENTS,
   DESCRIPTION_LENGTH,
   HASHTAGS_VOLUME,
-  HASHTAG_SYMBOLS
+  HASHTAG_SYMBOLS,
+  SCALE_STEP,
+  MIN_SCALE,
+  MAX_SCALE
 };
 

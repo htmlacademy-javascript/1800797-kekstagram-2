@@ -450,6 +450,10 @@ main {
   border-radius: 50% 0 0 50%;
 }
 
+.scale__control--smaller:disabled {
+  background-color: rgb(204, 204, 204);
+}
+
 .scale__control--smaller::before {
   content: "–";
   position: absolute;
@@ -477,6 +481,10 @@ main {
 
 .scale__control--bigger {
   border-radius: 0 50% 50% 0;
+}
+
+.scale__control--bigger:disabled {
+  background-color: rgb(204, 204, 204);
 }
 
 .scale__control--bigger::before {
