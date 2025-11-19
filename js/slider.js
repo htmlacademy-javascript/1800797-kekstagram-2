@@ -3,6 +3,8 @@ const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const radioList = document.querySelector('.effects__list');
 const image = document.querySelector('.img-upload__preview img');
+const effectBar = document.querySelector('.img-upload__effect-level');
+const originalEffect = document.querySelector('#effect-none');
 
 
 noUiSlider.create(sliderElement, {
@@ -79,8 +81,8 @@ const renderEffect = (effect) => {
     case 'sepia':
       filterStyle = `sepia(${valueElement.value})`;
       break;
-    case 'mavin':
-      filterStyle = `marvin(${valueElement.value}%)`;
+    case 'marvin':
+      filterStyle = `invert(${valueElement.value}%)`;
       break;
     case 'phobos':
       filterStyle = `blur(${valueElement.value}px)`;
@@ -94,13 +96,27 @@ const renderEffect = (effect) => {
 
 sliderElement.noUiSlider.on('update', () => {
   valueElement.value = sliderElement.noUiSlider.get();
-  renderEffect(document.querySelector());
+  renderEffect(document.querySelector('.effects__radio:checked').value);
 });
 
 
 radioList.addEventListener('change', (evt) => {
   if (evt.target.name === 'effect') {
-    updateSliderOption(evt.target.value);
+    if (evt.target.value === 'none') {
+      effectBar.classList.add('hidden');
+      image.style.filter = '';
+    } else {
+      updateSliderOption(evt.target.value);
+      renderEffect(evt.target.value);
+      effectBar.classList.remove('hidden');
+    }
   }
 });
 
+const resetEffects = () => {
+  effectBar.classList.add('hidden');
+  image.style.filter = '';
+  originalEffect.checked = true;
+};
+
+export { resetEffects };

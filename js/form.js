@@ -1,7 +1,7 @@
 import { resetScale } from './scale.js';
 import { isEscKey } from './utlis.js';
 import { validateForm } from './validation.js';
-import './slider.js';
+import { resetEffects } from './slider.js';
 
 const imageUploadForm = document.querySelector('.img-upload__form');
 const imageInput = document.querySelector('.img-upload__input');
@@ -25,6 +25,7 @@ const showModal = () => {
   renderPreviewImage();
   document.addEventListener('keydown', onClickEsc);
   resetScale();
+  resetEffects();
 };
 
 imageInput.addEventListener('change', (evt) => {

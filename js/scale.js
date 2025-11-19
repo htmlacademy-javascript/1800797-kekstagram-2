@@ -12,7 +12,7 @@ const imagePreview = document.querySelector('.img-upload__preview img');
 let scale;
 
 const renderScale = () => {
-  scaleControl.value = scale;
+  scaleControl.value = `${scale}%`;
   imagePreview.style = `transform: scale(${scale / 100})`;
   if (scale === MIN_SCALE) {
     minus.disabled = true;
