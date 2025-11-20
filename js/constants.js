@@ -62,6 +62,8 @@ const SCALE_STEP = 25;
 const MIN_SCALE = 25;
 const MAX_SCALE = 100;
 
+const POST_DATA_URL = 'https://31.javascript.htmlacademy.pro/kekstagram/';
+
 export {
   PHOTOS,
   DESCRIPTION,
@@ -80,6 +82,7 @@ export {
   HASHTAG_SYMBOLS,
   SCALE_STEP,
   MIN_SCALE,
-  MAX_SCALE
+  MAX_SCALE,
+  POST_DATA_URL
 };
 
