@@ -1,0 +1,88 @@
+const PHOTOS = 25;
+
+const DESCRIPTION = [
+  'Классно!',
+  'Бодро',
+  'Огонь!',
+  'Пожар',
+  'Весело',
+  'Вкусно',
+  'Аппетитно',
+  'Восторженно',
+  'Смело',
+  'Отнудь не...'
+];
+
+const MESSAGE = [
+  'Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+];
+
+const MIN_LIKES = 15;
+
+const MAX_LIKES = 200;
+
+const COMMENTS = 500;
+
+const MIN_AVATAR = 1;
+
+const MAX_AVATAR = 6;
+
+const NAMES = [
+  'Иван',
+  'Пётр',
+  'Александр',
+  'Николай',
+  'Максим',
+  'Светлана',
+  'Елена',
+  'Мария',
+  'Евгения',
+  'Надежда'
+];
+
+const MIN_COMMENTS = 1;
+
+const MAX_COMMENTS = 30;
+
+const MAX_SHOWN_COMMENTS = 5;
+
+const DESCRIPTION_LENGTH = 140;
+
+const HASHTAGS_VOLUME = 5;
+
+const HASHTAG_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
+
+const SCALE_STEP = 25;
+
+const MIN_SCALE = 25;
+const MAX_SCALE = 100;
+
+const POST_DATA_URL = 'https://31.javascript.htmlacademy.pro/kekstagram/';
+
+export {
+  PHOTOS,
+  DESCRIPTION,
+  MESSAGE,
+  MIN_LIKES,
+  MAX_LIKES,
+  COMMENTS,
+  MIN_AVATAR,
+  MAX_AVATAR,
+  NAMES,
+  MIN_COMMENTS,
+  MAX_COMMENTS,
+  MAX_SHOWN_COMMENTS,
+  DESCRIPTION_LENGTH,
+  HASHTAGS_VOLUME,
+  HASHTAG_SYMBOLS,
+  SCALE_STEP,
+  MIN_SCALE,
+  MAX_SCALE,
+  POST_DATA_URL
+};
+
