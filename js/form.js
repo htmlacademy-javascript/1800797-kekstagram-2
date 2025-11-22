@@ -2,6 +2,8 @@ import { resetScale } from './scale.js';
 import { isEscKey } from './utlis.js';
 import { validateForm } from './validation.js';
 import { resetEffects } from './slider.js';
+import { postPhoto } from './api.js';
+import { showPopupError, showPopupSuccess } from './popups.js';
 
 const imageUploadForm = document.querySelector('.img-upload__form');
 const imageInput = document.querySelector('.img-upload__input');
@@ -9,7 +11,7 @@ const imageUpload = document.querySelector('.img-upload__overlay');
 const imagePreview = imageUpload.querySelector('.img-upload__preview img');
 const imagePreviewEffects = imageUpload.querySelectorAll('.effects__preview');
 const imgUploadCancelButton = document.querySelector('.img-upload__cancel');
-
+const submitButton = document.querySelector('.img-upload__submit');
 
 const renderPreviewImage = () => {
   const fileImage = imageInput.files[0];
@@ -41,10 +43,35 @@ const closeImageInput = () => {
   imageUploadForm.reset();
 };
 
+const disableSubmitButton = () => {
+  submitButton.textContent = 'Публикую...';
+  submitButton.disabled = true;
+};
+
+const enableSubmitButton = () => {
+  submitButton.textContent = 'Опубликовать';
+  submitButton.disabled = false;
+};
+
 imageUploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   if (validateForm()) {
-    closeImageInput();
+    disableSubmitButton();
+    postPhoto(new FormData(evt.target))
+      .then((responce) => {
+        if (responce.ok) {
+          showPopupSuccess();
+          closeImageInput();
+        } else {
+          showPopupError();
+        }
+      })
+      .catch(() => {
+        showPopupError();
+      })
+      .finally(() => {
+        enableSubmitButton();
+      });
   }
 });
 
@@ -58,7 +85,7 @@ function onClickEsc(evt) {
   if (isFocusedInput) {
     return false;
   }
-  if(isEscKey(evt)) {
+  if (isEscKey(evt)) {
     evt.preventDefault();
     closeImageInput();
   }

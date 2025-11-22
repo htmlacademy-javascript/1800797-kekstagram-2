@@ -1,5 +1,7 @@
 import { renderThumbnail } from './thumbnails.js';
-import { getPhotos } from './data.js';
+import { getPhotos } from './api.js';
 import './form.js';
-import './scale.js';
-renderThumbnail(getPhotos());
+
+getPhotos().then((photos) => {
+  renderThumbnail(photos);
+});
