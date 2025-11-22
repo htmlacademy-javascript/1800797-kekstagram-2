@@ -64,6 +64,10 @@ const MAX_SCALE = 100;
 
 const POST_DATA_URL = 'https://31.javascript.htmlacademy.pro/kekstagram/';
 
+const GET_DATA_URL = 'https://31.javascript.htmlacademy.pro/kekstagram/data';
+
+const ALERT_SHOW_TIME = 5000;
+
 export {
   PHOTOS,
   DESCRIPTION,
@@ -83,6 +87,8 @@ export {
   SCALE_STEP,
   MIN_SCALE,
   MAX_SCALE,
-  POST_DATA_URL
+  POST_DATA_URL,
+  GET_DATA_URL,
+  ALERT_SHOW_TIME
 };
 
