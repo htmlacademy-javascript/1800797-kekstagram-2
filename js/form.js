@@ -12,7 +12,6 @@ const imagePreview = imageUpload.querySelector('.img-upload__preview img');
 const imagePreviewEffects = imageUpload.querySelectorAll('.effects__preview');
 const imgUploadCancelButton = document.querySelector('.img-upload__cancel');
 const submitButton = document.querySelector('.img-upload__submit');
-// const popupButtonSuccess = document.querySelector('.success__button');
 
 const renderPreviewImage = () => {
   const fileImage = imageInput.files[0];
