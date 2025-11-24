@@ -1,38 +1,31 @@
+import { Popups } from './constants';
 import { isEscKey } from './utlis';
 
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 
+const templates = {
+  [Popups.SUCCESS]: successTemplate,
+  [Popups.ERROR]: errorTemplate
+};
+
 const closePopUp = () => {
   document.querySelector('.popup').remove();
   document.removeEventListener('keydown', onClickEsc);
-  document.removeEventListener('click', onClickOutside);
 };
 
-const showPopupSuccess = () => {
-  const successPopupElement = successTemplate.cloneNode(true);
-  document.body.append(successPopupElement);
-  document.querySelector('.success__button').addEventListener('click', closePopUp);
-  successPopupElement.classList.add('popup');
+const showPopup = (typePopup) => {
+  const popupElement = templates[typePopup].cloneNode(true);
+  document.body.append(popupElement);
+
+  popupElement.addEventListener('click', ({ target }) => {
+    if (target.classList.contains(typePopup) || target.classList.contains(`${typePopup}__button`)) {
+      popupElement.remove();
+    }
+  });
+  popupElement.classList.add('popup');
   document.addEventListener('keydown', onClickEsc);
-  document.addEventListener('click', onClickOutside);
 };
-
-const showPopupError = () => {
-  const errorPopupElement = errorTemplate.cloneNode(true);
-  document.body.append(errorPopupElement);
-  document.querySelector('.error__button').addEventListener('click', closePopUp);
-  errorPopupElement.classList.add('popup');
-  document.addEventListener('keydown', onClickEsc);
-  document.addEventListener('click', onClickOutside);
-
-};
-
-function onClickOutside(evt) {
-  if (evt.target.classList.contains('success') || evt.target.classList.contains('error')) {
-    closePopUp();
-  }
-}
 
 function onClickEsc(evt) {
   if (isEscKey(evt)) {
@@ -42,6 +35,5 @@ function onClickEsc(evt) {
 }
 
 export {
-  showPopupSuccess,
-  showPopupError
+  showPopup
 };

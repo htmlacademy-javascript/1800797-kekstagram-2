@@ -1,69 +1,25 @@
-import { ALERT_SHOW_TIME } from './constants';
+import { ALERT_SHOW_TIME } from './constants.js';
 
-function getRandomInteger(min, max) {
-  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
-  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
-  const result = Math.random() * (upper - lower + 1) + lower;
+const alertTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 
-  return Math.floor(result);
-}
+export const isEscKey = (evt) => evt.key === 'Escape';
+export const isEnterKey = (evt) => evt.key === 'Enter';
 
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+export const checkString = (string, value) => string.length <= value;
 
-
-function createRandomIdFromRangeGenerator(min, max) {
-  const previousValues = [];
-
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= (max - min + 1)) {
-      return null;
-    }
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-}
-
-const isEscKey = (evt) => evt.key === 'Escape';
-const isEnterKey = (evt) => evt.key === 'Enter';
-
-function checkString(string, value) {
-  if (string.length <= value) {
-    return true;
-  }
-  return false;
-}
-
-const showAlert = (message) => {
-  const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = '100';
-  alertContainer.style.position = 'absolute';
-  alertContainer.style.left = '0';
-  alertContainer.style.top = '0';
-  alertContainer.style.right = '0';
-  alertContainer.style.padding = '10px 3px';
-  alertContainer.style.fontSize = '20px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = 'red';
-
-  alertContainer.textContent = message;
-
-  document.body.append(alertContainer);
+export const showAlert = () => {
+  const alertPopup = alertTemplate.cloneNode(true);
+  document.body.append(alertPopup);
 
   setTimeout(() => {
-    alertContainer.remove();
+    alertPopup.remove();
   }, ALERT_SHOW_TIME);
 };
 
-
-export { getRandomArrayElement,
-  getRandomInteger,
-  createRandomIdFromRangeGenerator,
-  isEscKey,
-  isEnterKey,
-  checkString,
-  showAlert
+export const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
 };

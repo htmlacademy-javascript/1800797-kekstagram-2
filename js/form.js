@@ -1,9 +1,10 @@
 import { resetScale } from './scale.js';
 import { isEscKey } from './utlis.js';
-import { validateForm } from './validation.js';
+import { resetValidation, validateForm } from './validation.js';
 import { resetEffects } from './slider.js';
 import { postPhoto } from './api.js';
-import { showPopupError, showPopupSuccess } from './popups.js';
+import { showPopup} from './popups.js';
+import { Popups } from './constants.js';
 
 const imageUploadForm = document.querySelector('.img-upload__form');
 const imageInput = document.querySelector('.img-upload__input');
@@ -26,8 +27,6 @@ const showModal = () => {
   document.body.classList.add('modal-open');
   renderPreviewImage();
   document.addEventListener('keydown', onClickEsc);
-  resetScale();
-  resetEffects();
 };
 
 imageInput.addEventListener('change', (evt) => {
@@ -35,22 +34,19 @@ imageInput.addEventListener('change', (evt) => {
   showModal();
 });
 
-
 const closeImageInput = () => {
   imageUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onClickEsc);
   imageUploadForm.reset();
+  resetValidation();
+  resetScale();
+  resetEffects();
 };
 
-const disableSubmitButton = () => {
-  submitButton.textContent = 'Публикую...';
-  submitButton.disabled = true;
-};
-
-const enableSubmitButton = () => {
-  submitButton.textContent = 'Опубликовать';
-  submitButton.disabled = false;
+const disableSubmitButton = (isDisabled = true) => {
+  submitButton.textContent = isDisabled ? 'Публикую...' : 'Опубликовать';
+  submitButton.disabled = isDisabled;
 };
 
 imageUploadForm.addEventListener('submit', (evt) => {
@@ -60,29 +56,29 @@ imageUploadForm.addEventListener('submit', (evt) => {
     postPhoto(new FormData(evt.target))
       .then((responce) => {
         if (responce.ok) {
-          showPopupSuccess();
+          showPopup(Popups.SUCCESS);
           closeImageInput();
         } else {
-          showPopupError();
+          throw new Error();
         }
       })
       .catch(() => {
-        showPopupError();
+        showPopup(Popups.ERROR);
       })
       .finally(() => {
-        enableSubmitButton();
+        disableSubmitButton(false);
       });
   }
 });
 
-
-imgUploadCancelButton.addEventListener('click', () => {
+imgUploadCancelButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
   closeImageInput();
 });
 
 function onClickEsc(evt) {
   const isFocusedInput = evt.target.classList.contains('text__hashtags') || evt.target.classList.contains('text__description');
-  if (isFocusedInput) {
+  if (isFocusedInput || document.querySelector('.error')) {
     return false;
   }
   if (isEscKey(evt)) {

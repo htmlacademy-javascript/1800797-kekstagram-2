@@ -1,8 +1,9 @@
 import {
   DESCRIPTION_LENGTH,
   HASHTAG_SYMBOLS,
-  HASHTAGS_VOLUME } from './constants';
-import { checkString } from './utlis';
+  HASHTAGS_VOLUME
+} from './constants.js';
+import { checkString } from './utlis.js';
 
 const imageUploadForm = document.querySelector('.img-upload__form');
 const hashtagField = document.querySelector('.text__hashtags');
@@ -27,7 +28,6 @@ const validateHashtag = (value) => {
   const tags = getTagsArray(value);
   return !value.length ? true : !tags.some((tag) => !HASHTAG_SYMBOLS.test(tag));
 };
-
 
 pristine.addValidator(
   descriptionField,
@@ -70,4 +70,8 @@ pristine.addValidator(
 
 const validateForm = () => pristine.validate();
 
-export { validateForm };
+const resetValidation = () => {
+  pristine.reset();
+};
+
+export { validateForm, resetValidation };
