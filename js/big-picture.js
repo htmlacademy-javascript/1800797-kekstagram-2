@@ -1,5 +1,6 @@
 import { MAX_SHOWN_COMMENTS } from './constants.js';
 import { isEscKey, isEnterKey } from './utlis.js';
+
 const bigPicture = document.querySelector('.big-picture');
 const buttonClose = document.querySelector('.big-picture__cancel');
 const bigPictureImage = bigPicture.querySelector('.big-picture__img img');
@@ -8,7 +9,8 @@ const socialCaption = bigPicture.querySelector('.social__caption');
 const bigPictureCommentsContainer = bigPicture.querySelector('.social__comments');
 const bigPictureCommentItem = bigPicture.querySelector('.social__comment');
 const bigPictureCommentsLoader = bigPicture.querySelector('.social__comments-loader');
-const bigPictureSocialCount = bigPicture.querySelector('.social__comment-count');
+const commentShownCount = bigPicture.querySelector('.social__comment-shown-count');
+const totalComments = bigPicture.querySelector('.social__comment-total-count');
 
 const commentsList = [];
 let commentsVolume = 0;
@@ -22,14 +24,15 @@ const renderButtonLoader = () => {
 };
 
 const renderStatistics = () => {
-  bigPictureSocialCount.innerHTML = `<span class="social__comment-shown-count">${commentsVolume - commentsList.length}
-    </span> из <span class="social__comment-total-count">${commentsVolume}</span> комментариев`;
+  commentShownCount.textContent = commentsVolume - commentsList.length;
 };
 
 const renderComment = (comment) => {
   const commentElement = bigPictureCommentItem.cloneNode(true);
-  commentElement.querySelector('.social__picture').src = comment.avatar;
-  commentElement.querySelector('.social__text').src = comment.message;
+  const avatar = commentElement.querySelector('.social__picture');
+  avatar.src = comment.avatar;
+  avatar.alt = comment.name;
+  commentElement.querySelector('.social__text').textContent = comment.message;
   return commentElement;
 };
 
@@ -45,6 +48,7 @@ const renderComments = () => {
 
 const openBigPicture = (photo) => {
   commentsVolume = photo.comments.length;
+  totalComments.textContent = commentsVolume;
   bigPictureCommentsContainer.innerHTML = '';
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -77,7 +81,6 @@ buttonClose.addEventListener('keydown', (evt) => {
     closeBigPicture();
   }
 });
-
 
 function onClickEsc(evt) {
   if (isEscKey(evt)) {
